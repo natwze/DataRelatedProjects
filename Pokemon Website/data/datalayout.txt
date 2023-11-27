@@ -1,0 +1,37 @@
+mysql> SHOW TABLES;                                              mysql> DESC pokemon_move;
++---------------------+                                          +------------+-------------+------+-----+---------+-------+
+| Tables_in_poke_info |                                          | Field      | Type        | Null | Key | Default | Extra |
++---------------------+                                          +------------+-------------+------+-----+---------+-------+
+| moves               |                                          | pokemon_id | varchar(32) | NO   | MUL | NULL    |       |
+| pokemon             |                                          | move_id    | varchar(64) | NO   | MUL | NULL    |       |
+| pokemon_move        |                                          +------------+-------------+------+-----+---------+-------+
+| pokemon_type        |
++---------------------+
+
+mysql> DESC moves;                                               mysql> DESC pokemon_type;
++---------------+-------------+------+-----+---------+-------+   +------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |   | Field      | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+   +------------+-------------+------+-----+---------+-------+
+| move_id       | varchar(64) | NO   | PRI | NULL    |       |   | sn         | int         | NO   | PRI | NULL    |       |
+| move_name     | varchar(64) | NO   |     | NULL    |       |   | pokemon_id | varchar(32) | NO   | MUL | NULL    |       |
+| move_type     | varchar(16) | NO   |     | NULL    |       |   | type       | varchar(16) | NO   |     | NULL    |       |
+| move_category | varchar(16) | NO   |     | NULL    |       |   +------------+-------------+------+-----+---------+-------+
+| move_pp       | int         | YES  |     | NULL    |       |   Questions for the dataset:
+| move_power    | int         | YES  |     | NULL    |       |     What Pokemon has the most moves available?
+| move_accuracy | int         | YES  |     | NULL    |       |     Which Pokemon has the highest speed value?
++---------------+-------------+------+-----+---------+-------+     What is the potential strongest moves for a Pokemon like a Lapras?                                                                   
+                                                                   
+mysql> DESC pokemon;                                               sp_attack*IF(move_category = "Special")
++------------+-------------+------+-----+---------+-------+        SELECT * FROM pokemon AS p INNER JOIN pokemon_move AS pm
+| Field      | Type        | Null | Key | Default | Extra |        ON p.pokemon_id = pm.pokemon_id INNER JOIN moves AS m
++------------+-------------+------+-----+---------+-------+        ON pm.move_id = m.move_id WHERE p.pokemon_id = "Abomasnow";
+| pokemon_id | varchar(32) | NO   | PRI | NULL    |       |        
+| hp         | int         | NO   |     | NULL    |       |        
+| attack     | int         | NO   |     | NULL    |       |        
+| defense    | int         | NO   |     | NULL    |       |
+| sp_attack  | int         | NO   |     | NULL    |       |
+| sp_defense | int         | NO   |     | NULL    |       |
+| speed      | int         | NO   |     | NULL    |       |
+| base_total | int         | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
